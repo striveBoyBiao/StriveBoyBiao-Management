@@ -4,11 +4,11 @@
 <mapper namespace="com.bootdo.blog.dao.ContentDao">
 
 	<select id="get" resultType="com.bootdo.blog.domain.ContentDO">
-		select `cid`,`title`,`slug`,`created`,`modified`,`content`,`type`,`tags`,`categories`,`hits`,`comments_num`,`allow_comment`,`allow_ping`,`allow_feed`,`status`,`author`,`gtm_create`,`gtm_modified` from blog_content where cid = #{value}
+		select `cid`,`title`,`slug`,`created`,`modified`,`content`,`type`,`tags`,`categories`,`hits`,`comments_num`,`allow_comment`,`allow_ping`,`allow_feed`,`status`,`author`,`gtm_create`,`gtm_modified`,introduction,gjzc,title_picture from blog_content where cid = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.blog.domain.ContentDO">
-		select `cid`,`title`,`slug`,`created`,`modified`,`content`,`type`,`tags`,`categories`,`hits`,`comments_num`,`allow_comment`,`allow_ping`,`allow_feed`,`status`,`author`,`gtm_create`,`gtm_modified` from blog_content
+		select `cid`,`title`,`slug`,`created`,`modified`,`content`,`type`,`tags`,`categories`,`hits`,`comments_num`,`allow_comment`,`allow_ping`,`allow_feed`,`status`,`author`,`gtm_create`,`gtm_modified`,introduction,gjzc,title_picture from blog_content
         <where>  
 		  		  <if test="cid != null and cid != ''"> and cid = #{cid} </if>
 		  		  <if test="title != null and title != ''"> and title = #{title} </if>
@@ -28,6 +28,9 @@
 		  		  <if test="author != null and author != ''"> and author = #{author} </if>
 		  		  <if test="gtmCreate != null and gtmCreate != ''"> and gtm_create = #{gtmCreate} </if>
 		  		  <if test="gtmModified != null and gtmModified != ''"> and gtm_modified = #{gtmModified} </if>
+				  <if test="introduction != null and introduction != ''"> and introduction = #{introduction} </if>
+				  <if test="gjzc != null and gjzc != ''"> and gjzc = #{gjzc} </if>
+				  <if test="titlepicture != null and titlepicture != ''"> and title_picture = #{titlepicture} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -63,6 +66,9 @@
 		  		  <if test="author != null and author != ''"> and author = #{author} </if>
 		  		  <if test="gtmCreate != null and gtmCreate != ''"> and gtm_create = #{gtmCreate} </if>
 		  		  <if test="gtmModified != null and gtmModified != ''"> and gtm_modified = #{gtmModified} </if>
+				  <if test="introduction != null and introduction != ''"> and introduction = #{introduction} </if>
+				  <if test="gjzc != null and gjzc != ''"> and gjzc = #{gjzc} </if>
+				  <if test="titlepicture != null and titlepicture != ''"> and title_picture = #{titlepicture} </if>
 		  		</where>
 	</select>
 	 
@@ -85,7 +91,10 @@
 			`status`, 
 			`author`, 
 			`gtm_create`, 
-			`gtm_modified`
+			`gtm_modified`,
+			introduction,
+			gjzc,
+			title_picture
 		)
 		values
 		(
@@ -105,7 +114,11 @@
 			#{status}, 
 			#{author}, 
 			#{gtmCreate}, 
-			#{gtmModified}
+			#{gtmModified},
+			#{introduction},
+			#{gjzc},
+			#{titlepicture}
+
 		)
 	</insert>
 	 
@@ -128,7 +141,10 @@
 			<if test="status != null">`status` = #{status}, </if>
 			<if test="author != null">`author` = #{author}, </if>
 			<if test="gtmCreate != null">`gtm_create` = #{gtmCreate}, </if>
-			<if test="gtmModified != null">`gtm_modified` = #{gtmModified}</if>
+			<if test="gtmModified != null">`gtm_modified` = #{gtmModified},</if>
+			<if test="introduction != null">`introduction` = #{introduction},</if>
+			<if test="gjzc != null">`gjzc` = #{gjzc},</if>
+			<if test="titlepicture != null">`title_picture` = #{titlepicture}</if>
 		</set>
 		where cid = #{cid}
 	</update>

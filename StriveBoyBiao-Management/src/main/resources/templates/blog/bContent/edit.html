@@ -27,6 +27,24 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-1 control-label">标题图片：</label>
+								<div class="col-sm-4">
+									<input id="img" name="img" class="form-control" type="file">
+									<input type="button" value="上传" onclick="fileUpload()">
+								</div>
+								<div class="col-sm-4">
+									<input id="titlepicture" name="titlepicture" class="form-control" type="text" th:value="${bContent.titlepicture}" style="display:none;">
+									<img th:src="@{${bContent.titlepicture}}" style="width: 120px;height: 120px" id="tp" >
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-1 control-label">简介：</label>
+								<div class="col-sm-11">
+									<input th:value="${bContent.introduction}" id="introduction"
+										   name="introduction" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
 								<input id="content" name="content" type="hidden"
 									th:value="${bContent.content}"> <label
 									class="col-sm-1 control-label">内容：</label>
@@ -38,9 +56,14 @@
 							</div>
 							<div class="form-group">
 								<label class="col-sm-1 control-label">类型：</label>
-								<div class="col-sm-11">
+								<div class="col-sm-4">
 									<input th:value="${bContent.categories}" id="categories"
 										name="categories" class="form-control" type="text">
+								</div>
+								<label class="col-sm-1 control-label">关键字词：</label>
+								<div class="col-sm-4">
+									<input th:value="${bContent.gjzc}" id="gjzc"
+										   name="gjzc" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
@@ -90,6 +113,34 @@
 	<div th:include="include::footer"></div>
 	<script type="text/javascript" src="/js/appjs/blog/bContent/edit.js">
 		
+	</script>
+	<script>
+        function fileUpload() {
+            // 创建
+            var form_data = new FormData();
+            // 获取文件
+            var file_data = $("#img").prop("files")[0];
+            form_data.append("img", file_data);
+            $.ajax({
+                cache : true,
+                type : "POST",
+                url : "/blog/bContent/upload",
+                //data : $('#signupForm').serialize(),// 你的formid
+                data:form_data,
+                async : false,
+                processData: false,
+                contentType: false, //必须
+                success : function(r) {
+                    if (r!="") {
+                        $("#titlepicture").val(r);
+                        $("#tp").attr("src",r);
+                        $("#tp").show();
+                    }
+                }
+            });
+
+        }
+
 	</script>
 </body>
 </html>

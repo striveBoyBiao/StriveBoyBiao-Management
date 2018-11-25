@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileInputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +34,7 @@ public class FileController extends BaseController {
 
 	@Autowired
 	private BootdoConfig bootdoConfig;
+
 
 	@GetMapping()
 	@RequiresPermissions("common:sysFile:sysFile")
@@ -140,22 +142,20 @@ public class FileController extends BaseController {
 	@ResponseBody
 	@PostMapping("/upload")
 	R upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
-		if ("test".equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
-		String fileName = file.getOriginalFilename();
-		fileName = FileUtil.renameToUUID(fileName);
-		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date());
+		QiniuUtil qiniuUtil=new QiniuUtil();
+		String result = null;
+		String fileName = qiniuUtil.renamePic(file.getOriginalFilename());
 		try {
-			FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath(), fileName);
+			FileInputStream inputStream = (FileInputStream) file.getInputStream();
+			//上传七牛云服务器
+			result = qiniuUtil.qiniuInputStreamUpload(inputStream,fileName);
+			/**保存到数据*/
+			FileDO sysFile = new FileDO(FileType.fileType(fileName), result, new Date());
+			sysFileService.save(sysFile);
 		} catch (Exception e) {
-			return R.error();
+			return  R.error();
 		}
-
-		if (sysFileService.save(sysFile) > 0) {
-			return R.ok().put("fileName",sysFile.getUrl());
-		}
-		return R.error();
+		return R.ok().put("fileName",result);
 	}
 
 

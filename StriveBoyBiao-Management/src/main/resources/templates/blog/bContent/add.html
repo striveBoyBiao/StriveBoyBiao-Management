@@ -13,7 +13,7 @@
 						<div class="col-sm-12">
 							<h4>发布文章</h4>
 						</div>
-						<form class="form-horizontal m-t" id="signupForm">
+						<form class="form-horizontal m-t" id="signupForm"  enctype="multipart/form-data">
 							<input id="cid" name="cid" type="hidden">
 							<div class="form-group">
 								<label class="col-sm-1 control-label">标题：</label>
@@ -27,6 +27,23 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-1 control-label">标题图片：</label>
+								<div class="col-sm-4">
+									<input id="img" name="img" class="form-control" type="file">
+									<input type="button" value="上传" onclick="fileUpload()">
+								</div>
+								<div class="col-sm-4">
+									<input id="titlepicture" name="titlepicture" class="form-control" type="text" value="" style="display:none;">
+									<img src="" style="display:none;width: 120px;height: 120px" id="tp" >
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-1 control-label">简介：</label>
+								<div class="col-sm-11">
+									<input id="introduction" name="introduction" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
 								<input id="content" name="content" type="hidden"> <label
 									class="col-sm-1 control-label">内容：</label>
 								<div class="col-sm-11">
@@ -37,8 +54,12 @@
 							</div>
 							<div class="form-group">
 								<label class="col-sm-1 control-label">类型：</label>
-								<div class="col-sm-11">
+								<div class="col-sm-4">
 									<input id="categories" name="categories" class="form-control" type="text">
+								</div>
+								<label class="col-sm-1 control-label">关键字词：</label>
+								<div class="col-sm-4">
+									<input id="gjzc" name="gjzc" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
@@ -84,9 +105,35 @@
 	</div>
 	<div th:include="include::footer"></div>
 
+	<script type="text/javascript" src="/js/appjs/blog/bContent/add.js"></script>
 
-	<script type="text/javascript" src="/js/appjs/blog/bContent/add.js">
-		
+	<script>
+        function fileUpload() {
+            // 创建
+            var form_data = new FormData();
+            // 获取文件
+            var file_data = $("#img").prop("files")[0];
+            form_data.append("img", file_data);
+            $.ajax({
+                cache : true,
+                type : "POST",
+                url : "/blog/bContent/upload",
+                //data : $('#signupForm').serialize(),// 你的formid
+                data:form_data,
+                async : false,
+                processData: false,
+                contentType: false, //必须
+                success : function(r) {
+                    if (r!="") {
+						$("#titlepicture").val(r);
+                        $("#tp").attr("src",r);
+                        $("#tp").show();
+                    }
+                }
+            });
+
+        }
+
 	</script>
 </body>
 </html>

@@ -4,15 +4,20 @@ import com.bootdo.blog.domain.ContentDO;
 import com.bootdo.blog.service.ContentService;
 import com.bootdo.common.config.Constant;
 import com.bootdo.common.controller.BaseController;
-import com.bootdo.common.utils.PageUtils;
-import com.bootdo.common.utils.Query;
-import com.bootdo.common.utils.R;
+import com.bootdo.common.utils.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -67,7 +72,7 @@ public class ContentController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("blog:bContent:add")
 	@PostMapping("/save")
-	public R save(ContentDO bContent) {
+	public R save(ContentDO bContent,HttpServletRequest request) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
@@ -92,6 +97,27 @@ public class ContentController extends BaseController {
 			return R.ok().put("cid", bContent.getCid());
 		}
 		return R.error();
+	}
+	@ResponseBody
+	@PostMapping("/upload")
+	public String upload(HttpServletRequest request){
+		MultipartHttpServletRequest obj=(MultipartHttpServletRequest)request;
+		MultipartFile file=obj.getFile("img");
+		if (null!=file){
+			QiniuUtil qiniuUtil=new QiniuUtil();
+			String result = null;
+			String fileName = qiniuUtil.renamePic(file.getOriginalFilename());
+			FileInputStream inputStream = null;
+			try {
+				inputStream = (FileInputStream) file.getInputStream();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			//上传七牛云服务器
+			result = qiniuUtil.qiniuInputStreamUpload(inputStream,fileName);
+			return result;
+		}
+		return "";
 	}
 
 	/**

@@ -51,6 +51,36 @@ public class ContentDO implements Serializable {
 	private Date gtmCreate;
 	//修改时间
 	private Date gtmModified;
+	/**简介*/
+	private String introduction;
+	/**关键字词*/
+	private String gjzc;
+	/**标题图片*/
+	private String titlepicture;
+
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
+
+	public String getGjzc() {
+		return gjzc;
+	}
+
+	public void setGjzc(String gjzc) {
+		this.gjzc = gjzc;
+	}
+
+	public String getTitlepicture() {
+		return titlepicture;
+	}
+
+	public void setTitlepicture(String titlepicture) {
+		this.titlepicture = titlepicture;
+	}
 
 	/**
 	 * 设置：
