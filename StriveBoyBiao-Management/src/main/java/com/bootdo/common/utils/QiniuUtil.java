@@ -39,7 +39,7 @@ public class QiniuUtil {
     private static String accessKey = "Kl0BP4gKYcuphgUqN5CijW9hIQlmelDdcrh_VPY8";
     private static String secretKey = "Pc-7EVQKkffXxj9ij9PI6PsABESh23585SIacsph";
     private static String bucket = "hebiao";
-    private static String origin="http://pd69gks0f.bkt.clouddn.com/";
+    private static String origin="http://www.zizhuling.cn.qiniudns.com/";
     private static  Auth auth = Auth.create(accessKey, secretKey);
 
 
