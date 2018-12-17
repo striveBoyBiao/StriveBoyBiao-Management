@@ -1,6 +1,7 @@
 package com.bootdo.system.controller;
 
 import com.bootdo.common.annotation.Log;
+import com.bootdo.common.config.BootdoConfig;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.domain.FileDO;
 import com.bootdo.common.domain.Tree;
@@ -34,34 +35,39 @@ public class LoginController extends BaseController {
 	MenuService menuService;
 	@Autowired
 	FileService fileService;
-	@GetMapping({ "/", "" })
+	@Autowired
+	BootdoConfig bootdoConfig;
+
+	@GetMapping({"/", ""})
 	String welcome(Model model) {
 
 		return "redirect:/blog";
 	}
 
 	@Log("请求访问主页")
-	@GetMapping({ "/index" })
+	@GetMapping({"/index"})
 	String index(Model model) {
 		List<Tree<MenuDO>> menus = menuService.listMenuTree(getUserId());
 		model.addAttribute("menus", menus);
 		model.addAttribute("name", getUser().getName());
 		FileDO fileDO = fileService.get(getUser().getPicId());
-		if(fileDO!=null&&fileDO.getUrl()!=null){
-			if(fileService.isExist(fileDO.getUrl())){
-				model.addAttribute("picUrl",fileDO.getUrl());
-			}else {
-				model.addAttribute("picUrl","/img/photo_s.jpg");
+		if (fileDO != null && fileDO.getUrl() != null) {
+			if (fileService.isExist(fileDO.getUrl())) {
+				model.addAttribute("picUrl", fileDO.getUrl());
+			} else {
+				model.addAttribute("picUrl", "/img/photo_s.jpg");
 			}
-		}else {
-			model.addAttribute("picUrl","/img/photo_s.jpg");
+		} else {
+			model.addAttribute("picUrl", "/img/photo_s.jpg");
 		}
 		model.addAttribute("username", getUser().getUsername());
 		return "index_v1";
 	}
 
 	@GetMapping("/login")
-	String login() {
+	String login(Model model) {
+		model.addAttribute("username", bootdoConfig.getUsername());
+		model.addAttribute("password", bootdoConfig.getPassword());
 		return "login";
 	}
 
