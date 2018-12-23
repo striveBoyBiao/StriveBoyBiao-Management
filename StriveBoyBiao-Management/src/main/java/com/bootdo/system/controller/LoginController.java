@@ -1,17 +1,16 @@
 package com.bootdo.system.controller;
 
 import com.bootdo.common.annotation.Log;
-import com.bootdo.common.config.BootdoConfig;
 import com.bootdo.common.controller.BaseController;
-import com.bootdo.common.domain.FileDO;
 import com.bootdo.common.domain.Tree;
-import com.bootdo.common.service.FileService;
 import com.bootdo.common.utils.MD5Utils;
+import com.bootdo.system.service.MenuService;
+import com.bootdo.common.config.BootdoConfig;
+import com.bootdo.common.domain.FileDO;
+import com.bootdo.common.service.FileService;
 import com.bootdo.common.utils.R;
 import com.bootdo.common.utils.ShiroUtils;
 import com.bootdo.system.domain.MenuDO;
-import com.bootdo.system.service.MenuService;
-import io.swagger.models.auth.In;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -32,7 +31,7 @@ public class LoginController extends BaseController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	MenuService menuService;
+    MenuService menuService;
 	@Autowired
 	FileService fileService;
 	@Autowired
@@ -74,7 +73,7 @@ public class LoginController extends BaseController {
 	@Log("登录")
 	@PostMapping("/login")
 	@ResponseBody
-	R ajaxLogin(String username, String password) {
+    R ajaxLogin(String username, String password) {
 
 		password = MD5Utils.encrypt(username, password);
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);

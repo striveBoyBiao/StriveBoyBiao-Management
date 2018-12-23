@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.bootdo.common.domain.Tree;
 import org.springframework.stereotype.Service;
 
-import com.bootdo.common.domain.Tree;
 import com.bootdo.system.domain.MenuDO;
 
 @Service

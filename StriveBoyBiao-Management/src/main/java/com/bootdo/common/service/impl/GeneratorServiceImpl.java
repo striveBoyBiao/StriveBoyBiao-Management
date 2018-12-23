@@ -5,19 +5,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipOutputStream;
 
+import com.bootdo.common.utils.GenUtils;
+import com.bootdo.common.dao.GeneratorMapper;
+import com.bootdo.common.service.GeneratorService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.bootdo.common.dao.GeneratorMapper;
-import com.bootdo.common.service.GeneratorService;
-import com.bootdo.common.utils.GenUtils;
 
 
 @Service
 public class GeneratorServiceImpl implements GeneratorService {
 	@Autowired
-	GeneratorMapper generatorMapper;
+    GeneratorMapper generatorMapper;
 
 	@Override
 	public List<Map<String, Object>> list() {

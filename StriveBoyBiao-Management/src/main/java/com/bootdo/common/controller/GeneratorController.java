@@ -1,9 +1,9 @@
 package com.bootdo.common.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.bootdo.common.service.GeneratorService;
 import com.bootdo.common.utils.GenUtils;
 import com.bootdo.common.utils.R;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -25,7 +25,7 @@ import java.util.Map;
 public class GeneratorController {
 	String prefix = "common/generator";
 	@Autowired
-	GeneratorService generatorService;
+    GeneratorService generatorService;
 
 	@GetMapping()
 	String generator() {
@@ -80,7 +80,7 @@ public class GeneratorController {
 
 	@ResponseBody
 	@PostMapping("/update")
-	R update(@RequestParam Map<String, Object> map) {
+    R update(@RequestParam Map<String, Object> map) {
 		try {
 			PropertiesConfiguration conf = new PropertiesConfiguration("generator.properties");
 			conf.setProperty("author", map.get("author"));

@@ -1,9 +1,9 @@
 package com.bootdo.activiti.controller;
 
 import com.bootdo.activiti.service.ProcessService;
+import com.bootdo.common.controller.BaseController;
 import com.bootdo.activiti.vo.ProcessVO;
 import com.bootdo.common.config.Constant;
-import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.R;
 import org.activiti.engine.ActivitiException;
@@ -29,7 +29,7 @@ import java.util.zip.ZipInputStream;
 
 @RequestMapping("activiti/process")
 @RestController
-public class ProcessController extends BaseController{
+public class ProcessController extends BaseController {
 
     @Autowired
     private RepositoryService repositoryService;

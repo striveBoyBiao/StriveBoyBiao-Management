@@ -1,12 +1,13 @@
 package com.bootdo.common.service.impl;
 
 import java.util.List;
+
+import com.bootdo.common.dao.LogDao;
+import com.bootdo.common.domain.LogDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import com.bootdo.common.dao.LogDao;
-import com.bootdo.common.domain.LogDO;
 import com.bootdo.common.domain.PageDO;
 import com.bootdo.common.service.LogService;
 import com.bootdo.common.utils.Query;
@@ -14,7 +15,7 @@ import com.bootdo.common.utils.Query;
 @Service
 public class LogServiceImpl implements LogService {
 	@Autowired
-	LogDao logMapper;
+    LogDao logMapper;
 
 	@Async
 	@Override

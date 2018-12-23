@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.bootdo.system.vo.UserVO;
-import org.springframework.stereotype.Service;
-
 import com.bootdo.common.domain.Tree;
+import com.bootdo.system.vo.UserVO;
 import com.bootdo.system.domain.DeptDO;
 import com.bootdo.system.domain.UserDO;
+import org.springframework.stereotype.Service;
+
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -32,7 +32,7 @@ public interface UserService {
 
 	Set<String> listRoles(Long userId);
 
-	int resetPwd(UserVO userVO,UserDO userDO) throws Exception;
+	int resetPwd(UserVO userVO, UserDO userDO) throws Exception;
 	int adminResetPwd(UserVO userVO) throws Exception;
 	Tree<DeptDO> getTree();
 

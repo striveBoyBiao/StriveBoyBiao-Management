@@ -2,10 +2,10 @@ package com.bootdo.system.service.impl;
 
 import com.bootdo.common.domain.Tree;
 import com.bootdo.common.utils.BuildTree;
+import com.bootdo.system.service.MenuService;
 import com.bootdo.system.dao.MenuDao;
 import com.bootdo.system.dao.RoleMenuDao;
 import com.bootdo.system.domain.MenuDO;
-import com.bootdo.system.service.MenuService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;

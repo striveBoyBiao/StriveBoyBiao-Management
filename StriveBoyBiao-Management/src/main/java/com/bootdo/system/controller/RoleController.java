@@ -1,10 +1,10 @@
 package com.bootdo.system.controller;
 
-import com.bootdo.common.annotation.Log;
-import com.bootdo.common.config.Constant;
 import com.bootdo.common.controller.BaseController;
-import com.bootdo.common.utils.R;
+import com.bootdo.common.config.Constant;
 import com.bootdo.system.domain.RoleDO;
+import com.bootdo.common.annotation.Log;
+import com.bootdo.common.utils.R;
 import com.bootdo.system.service.RoleService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.List;
 public class RoleController extends BaseController {
 	String prefix = "system/role";
 	@Autowired
-	RoleService roleService;
+    RoleService roleService;
 
 	@RequiresPermissions("sys:role:role")
 	@GetMapping()
@@ -55,7 +55,7 @@ public class RoleController extends BaseController {
 	@RequiresPermissions("sys:role:add")
 	@PostMapping("/save")
 	@ResponseBody()
-	R save(RoleDO role) {
+    R save(RoleDO role) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}

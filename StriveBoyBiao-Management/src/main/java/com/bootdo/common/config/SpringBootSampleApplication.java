@@ -1,6 +1,6 @@
 //package com.bootdo.common.config;
 //
-//import com.bootdo.BootdoApplication;
+//import BootdoApplication;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 //import org.springframework.boot.builder.SpringApplicationBuilder;

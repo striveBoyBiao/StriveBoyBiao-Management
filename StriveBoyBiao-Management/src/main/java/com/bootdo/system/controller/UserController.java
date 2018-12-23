@@ -3,18 +3,20 @@ package com.bootdo.system.controller;
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.config.Constant;
 import com.bootdo.common.controller.BaseController;
-import com.bootdo.common.domain.FileDO;
 import com.bootdo.common.domain.Tree;
 import com.bootdo.common.service.DictService;
-import com.bootdo.common.utils.*;
 import com.bootdo.system.domain.DeptDO;
 import com.bootdo.system.domain.RoleDO;
 import com.bootdo.system.domain.UserDO;
-import com.bootdo.system.service.RoleService;
 import com.bootdo.system.service.UserService;
+import com.bootdo.common.utils.MD5Utils;
+import com.bootdo.common.utils.PageUtils;
+import com.bootdo.common.utils.Query;
+import com.bootdo.common.utils.R;
+import com.bootdo.system.service.RoleService;
 import com.bootdo.system.vo.UserVO;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.collections.CollectionUtils;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +24,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,11 +33,11 @@ import java.util.Map;
 public class UserController extends BaseController {
 	private String prefix="system/user"  ;
 	@Autowired
-	UserService userService;
+    UserService userService;
 	@Autowired
-	RoleService roleService;
+    RoleService roleService;
 	@Autowired
-	DictService dictService;
+    DictService dictService;
 	@RequiresPermissions("sys:user:user")
 	@GetMapping("")
 	String user(Model model) {
@@ -48,7 +46,7 @@ public class UserController extends BaseController {
 
 	@GetMapping("/list")
 	@ResponseBody
-	PageUtils list(@RequestParam Map<String, Object> params) {
+    PageUtils list(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
 		Query query = new Query(params);
 		List<UserDO> sysUserList = userService.list(query);
@@ -81,7 +79,7 @@ public class UserController extends BaseController {
 	@Log("保存用户")
 	@PostMapping("/save")
 	@ResponseBody
-	R save(UserDO user) {
+    R save(UserDO user) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}

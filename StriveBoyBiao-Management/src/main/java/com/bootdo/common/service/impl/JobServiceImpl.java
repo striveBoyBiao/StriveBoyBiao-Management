@@ -1,10 +1,10 @@
 package com.bootdo.common.service.impl;
 
 import com.bootdo.common.config.Constant;
+import com.bootdo.common.quartz.utils.QuartzManager;
 import com.bootdo.common.dao.TaskDao;
 import com.bootdo.common.domain.ScheduleJob;
 import com.bootdo.common.domain.TaskDO;
-import com.bootdo.common.quartz.utils.QuartzManager;
 import com.bootdo.common.service.JobService;
 import com.bootdo.common.utils.ScheduleJobUtils;
 import org.quartz.SchedulerException;
@@ -22,7 +22,7 @@ public class JobServiceImpl implements JobService {
 	private TaskDao taskScheduleJobMapper;
 
 	@Autowired
-	QuartzManager quartzManager;
+    QuartzManager quartzManager;
 
 	@Override
 	public TaskDO get(Long id) {

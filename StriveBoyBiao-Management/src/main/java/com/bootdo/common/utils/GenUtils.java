@@ -1,8 +1,8 @@
 package com.bootdo.common.utils;
 
 
-import com.bootdo.common.config.Constant;
 import com.bootdo.common.domain.ColumnDO;
+import com.bootdo.common.config.Constant;
 import com.bootdo.common.domain.TableDO;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;

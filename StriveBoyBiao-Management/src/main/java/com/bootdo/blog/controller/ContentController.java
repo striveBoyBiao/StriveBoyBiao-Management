@@ -4,7 +4,10 @@ import com.bootdo.blog.domain.ContentDO;
 import com.bootdo.blog.service.ContentService;
 import com.bootdo.common.config.Constant;
 import com.bootdo.common.controller.BaseController;
-import com.bootdo.common.utils.*;
+import com.bootdo.common.utils.PageUtils;
+import com.bootdo.common.utils.QiniuUtil;
+import com.bootdo.common.utils.Query;
+import com.bootdo.common.utils.R;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,9 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Part;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Date;
@@ -72,7 +73,7 @@ public class ContentController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("blog:bContent:add")
 	@PostMapping("/save")
-	public R save(ContentDO bContent,HttpServletRequest request) {
+	public R save(ContentDO bContent, HttpServletRequest request) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}

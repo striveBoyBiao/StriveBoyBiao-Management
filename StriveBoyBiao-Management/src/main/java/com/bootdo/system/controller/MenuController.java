@@ -24,7 +24,7 @@ import java.util.Map;
 public class MenuController extends BaseController {
 	String prefix = "system/menu";
 	@Autowired
-	MenuService menuService;
+    MenuService menuService;
 
 	@RequiresPermissions("sys:menu:menu")
 	@GetMapping()
@@ -73,7 +73,7 @@ public class MenuController extends BaseController {
 	@RequiresPermissions("sys:menu:add")
 	@PostMapping("/save")
 	@ResponseBody
-	R save(MenuDO menu) {
+    R save(MenuDO menu) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
@@ -116,7 +116,7 @@ public class MenuController extends BaseController {
 
 	@GetMapping("/tree")
 	@ResponseBody
-	Tree<MenuDO> tree() {
+    Tree<MenuDO> tree() {
 		Tree<MenuDO>  tree = menuService.getTree();
 		return tree;
 	}

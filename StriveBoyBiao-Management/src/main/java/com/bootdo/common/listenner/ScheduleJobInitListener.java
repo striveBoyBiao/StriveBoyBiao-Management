@@ -1,19 +1,19 @@
 package com.bootdo.common.listenner;
 
+import com.bootdo.common.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.bootdo.common.quartz.utils.QuartzManager;
-import com.bootdo.common.service.JobService;
 
 @Component
 @Order(value = 1)
 public class ScheduleJobInitListener implements CommandLineRunner {
 
 	@Autowired
-	JobService scheduleJobService;
+    JobService scheduleJobService;
 
 	@Autowired
 	QuartzManager quartzManager;

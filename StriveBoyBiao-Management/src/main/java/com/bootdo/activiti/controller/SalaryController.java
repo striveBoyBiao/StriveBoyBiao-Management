@@ -28,7 +28,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/act/salary")
-public class SalaryController extends BaseController{
+public class SalaryController extends BaseController {
     @Autowired
     private SalaryService salaryService;
     @Autowired

@@ -1,5 +1,6 @@
 package com.bootdo.blog.service.impl;
 
+import com.bootdo.blog.domain.ContentDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.bootdo.blog.dao.ContentDao;
-import com.bootdo.blog.domain.ContentDO;
 import com.bootdo.blog.service.ContentService;
 
 

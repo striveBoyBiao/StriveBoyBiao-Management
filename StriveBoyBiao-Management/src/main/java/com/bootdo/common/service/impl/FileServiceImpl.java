@@ -1,6 +1,9 @@
 package com.bootdo.common.service.impl;
 
+import com.bootdo.common.dao.FileDao;
+import com.bootdo.common.service.FileService;
 import com.bootdo.common.config.BootdoConfig;
+import com.bootdo.common.domain.FileDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,10 +11,6 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import com.bootdo.common.dao.FileDao;
-import com.bootdo.common.domain.FileDO;
-import com.bootdo.common.service.FileService;
-import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 

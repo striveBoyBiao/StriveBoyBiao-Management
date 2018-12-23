@@ -1,10 +1,11 @@
 package com.bootdo.common.controller;
 
+import com.bootdo.common.service.FileService;
 import com.bootdo.common.config.BootdoConfig;
 import com.bootdo.common.domain.FileDO;
-import com.bootdo.common.service.FileService;
 import com.bootdo.common.utils.*;
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,7 +1,7 @@
 package com.bootdo.activiti.controller;
 
-import com.bootdo.common.config.Constant;
 import com.bootdo.common.controller.BaseController;
+import com.bootdo.common.config.Constant;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.R;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -39,7 +39,7 @@ import static org.activiti.editor.constants.ModelDataJsonConstants.*;
  */
 @RequestMapping("/activiti")
 @RestController
-public class ModelController extends BaseController{
+public class ModelController extends BaseController {
     protected static final Logger LOGGER = LoggerFactory.getLogger(ModelEditorJsonRestResource.class);
 
     @Autowired
