@@ -114,7 +114,11 @@ public class FileController extends BaseController {
 		if ("test".equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
-		String fileName = bootdoConfig.getUploadPath() + sysFileService.get(id).getUrl().replace("/files/", "");
+		FileDO fileDO=sysFileService.get(id);
+		String fileName = bootdoConfig.getUploadPath() + fileDO.getUrl().replace("/files/", "");
+		/**删除七牛云上的图片*/
+		QiniuUtil qiniuUtil=new QiniuUtil();
+		qiniuUtil.deleteFile(fileDO.getUrl());
 		if (sysFileService.remove(id) > 0) {
 			boolean b = FileUtil.deleteFile(fileName);
 			if (!b) {
@@ -148,7 +152,7 @@ public class FileController extends BaseController {
 		String fileName = qiniuUtil.renamePic(file.getOriginalFilename());
 		try {
 			FileInputStream inputStream = (FileInputStream) file.getInputStream();
-			//上传七牛云服务器
+			/**上传七牛云服务器*/
 			result = qiniuUtil.qiniuInputStreamUpload(inputStream,fileName);
 			/**保存到数据*/
 			FileDO sysFile = new FileDO(FileType.fileType(fileName), result, new Date());

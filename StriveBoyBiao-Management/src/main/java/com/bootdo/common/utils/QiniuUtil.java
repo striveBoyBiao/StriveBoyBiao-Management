@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
+import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
@@ -187,6 +188,26 @@ public class QiniuUtil {
             return "上传文件扩展名是不允许的扩展名\n只允许" + extMap.get(dirName) + "格式";
         }
         return "valid";
+    }
+
+    /**
+     * 删除七牛云的文件
+     * @param path
+     */
+    public static void deleteFile(String path){
+        //构造一个带指定Zone对象的配置类 zone2华南
+        Configuration cfg = new Configuration(Zone.zone2());
+        Auth auth = Auth.create(accessKey, secretKey);
+        BucketManager bucketMgr = new BucketManager(auth, cfg);
+        //指定需要删除的文件，和文件所在的存储空间
+        String[]  key = path.split("/");
+        String file= key[key.length-1];
+        try {
+            Response delete = bucketMgr.delete(bucket, file);
+            delete.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args){
