@@ -41,7 +41,7 @@ public class ContentDO implements Serializable {
 	private Integer allowComment;
 	//允许ping
 	private Integer allowPing;
-	//允许反馈
+	//允许反馈（订阅）
 	private Integer allowFeed;
 	//状态
 	private Integer status;
