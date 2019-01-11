@@ -4,6 +4,8 @@ import com.bootdo.blog.domain.ContentDO;
 import com.bootdo.blog.service.ContentService;
 import com.bootdo.common.config.Constant;
 import com.bootdo.common.controller.BaseController;
+import com.bootdo.common.domain.FileDO;
+import com.bootdo.common.service.FileService;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.QiniuUtil;
 import com.bootdo.common.utils.Query;
@@ -35,6 +37,8 @@ import java.util.Map;
 public class ContentController extends BaseController {
 	@Autowired
     ContentService bContentService;
+	@Autowired
+	FileService fileService;
 
 	@GetMapping()
 	@RequiresPermissions("blog:bContent:bContent")
@@ -116,6 +120,8 @@ public class ContentController extends BaseController {
 			}
 			//上传七牛云服务器
 			result = qiniuUtil.qiniuInputStreamUpload(inputStream,fileName);
+			FileDO sysFile=new FileDO(99,result,new Date());
+			fileService.save(sysFile);
 			return result;
 		}
 		return "";

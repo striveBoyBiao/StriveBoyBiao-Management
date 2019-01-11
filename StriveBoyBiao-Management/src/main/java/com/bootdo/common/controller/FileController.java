@@ -118,11 +118,11 @@ public class FileController extends BaseController {
 		String fileName = bootdoConfig.getUploadPath() + fileDO.getUrl().replace("/files/", "");
 		/**删除七牛云上的图片*/
 		QiniuUtil qiniuUtil=new QiniuUtil();
-		qiniuUtil.deleteFile(fileDO.getUrl());
+		boolean b=qiniuUtil.deleteFile(fileDO.getUrl());
 		if (sysFileService.remove(id) > 0) {
-			boolean b = FileUtil.deleteFile(fileName);
+//			boolean b = FileUtil.deleteFile(fileName);
 			if (!b) {
-				return R.error("数据库记录删除成功，文件删除失败");
+				return R.error("数据库记录删除成功，七牛云文件删除失败");
 			}
 			return R.ok();
 		} else {

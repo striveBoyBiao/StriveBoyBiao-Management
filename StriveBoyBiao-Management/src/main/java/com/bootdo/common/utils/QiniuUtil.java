@@ -194,7 +194,7 @@ public class QiniuUtil {
      * 删除七牛云的文件
      * @param path
      */
-    public static void deleteFile(String path){
+    public static boolean deleteFile(String path){
         //构造一个带指定Zone对象的配置类 zone2华南
         Configuration cfg = new Configuration(Zone.zone2());
         Auth auth = Auth.create(accessKey, secretKey);
@@ -205,9 +205,12 @@ public class QiniuUtil {
         try {
             Response delete = bucketMgr.delete(bucket, file);
             delete.close();
+            return true;
         }catch (Exception e){
             e.printStackTrace();
+            return  false;
         }
+
     }
 
     public static void main(String[] args){
