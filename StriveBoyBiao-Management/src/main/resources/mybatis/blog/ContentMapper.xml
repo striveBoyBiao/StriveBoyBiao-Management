@@ -138,7 +138,6 @@
 			<if test="allowFeed != null">`allow_feed` = #{allowFeed}, </if>
 			<if test="status != null">`status` = #{status}, </if>
 			<if test="author != null">`author` = #{author}, </if>
-			<if test="gtmCreate != null">`gtm_create` = #{gtmCreate}, </if>
 			<if test="gtmModified != null">`gtm_modified` = #{gtmModified},</if>
 			<if test="introduction != null">`introduction` = #{introduction},</if>
 			<if test="gjzc != null">`gjzc` = #{gjzc},</if>
