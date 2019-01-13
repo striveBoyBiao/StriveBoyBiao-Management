@@ -6,6 +6,7 @@ import com.bootdo.common.domain.FileDO;
 import com.bootdo.common.utils.*;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -155,7 +156,13 @@ public class FileController extends BaseController {
 			/**上传七牛云服务器*/
 			result = qiniuUtil.qiniuInputStreamUpload(inputStream,fileName);
 			/**保存到数据*/
-			FileDO sysFile = new FileDO(FileType.fileType(fileName), result, new Date());
+			FileDO sysFile=null;
+			String sctype=request.getParameter("sctype");
+			if(org.apache.commons.lang3.StringUtils.isNotEmpty(sctype)){
+				sysFile = new FileDO(Integer.valueOf(sctype), result, new Date());
+			}else{
+				sysFile = new FileDO(FileType.fileType(fileName), result, new Date());
+			}
 			sysFileService.save(sysFile);
 		} catch (Exception e) {
 			return  R.error();

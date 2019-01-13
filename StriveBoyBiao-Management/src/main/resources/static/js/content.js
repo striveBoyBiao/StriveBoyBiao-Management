@@ -82,6 +82,8 @@ function sendFile(files, editor, $editable) {
     console.log("size="+size);
     var formData = new FormData();
     formData.append("file", files[0]);
+    /*设置上传类型为其他99*/
+    formData.append("sctype", 99);
     $.ajax({
         data : formData,
         type : "POST",
