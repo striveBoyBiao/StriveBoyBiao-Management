@@ -100,13 +100,4 @@ public class LoginController extends BaseController {
 	String mainOne() {
 		return "main_1";
 	}
-	@GetMapping("/main_2")
-	String mainTwo() {
-		return "main_2";
-	}
-	@GetMapping("/main_3")
-	String mainThree() {
-		return "main_3";
-	}
-
 }
