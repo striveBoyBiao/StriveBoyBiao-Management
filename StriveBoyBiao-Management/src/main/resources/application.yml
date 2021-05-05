@@ -7,7 +7,7 @@ server:
 #    uri-encoding: utf-8
 #security:
 #  basic:
-#    enabled: false
+#    enabled: false 
 spring:
   thymeleaf:
     mode: LEGACYHTML5
